@@ -1,6 +1,9 @@
 package de.zlElo.Libor;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class GUI extends JFrame {
     public GUI() {
@@ -15,12 +18,13 @@ public class GUI extends JFrame {
 
         // Initialize the database list
         DefaultListModel<String> dbs = new DefaultListModel<>();
-        dbs.addElement("Fiction");
-        dbs.addElement("Non-Fiction");
-        dbs.addElement("Biography");
-        dbs.addElement("Science");
-        dbs.addElement("History");
-        dbs.addElement("Poetry");
+
+        // Load all files from a directory into the list
+        File directory = new File("data/db/");
+        Arrays.stream(Objects.requireNonNull(directory.listFiles()))
+                .map(File::getName)
+                .forEach(dbs::addElement);
+
         JList<String> listDb = new JList<>(dbs);
         listDb.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listDb.setVisibleRowCount(6);
@@ -28,8 +32,7 @@ public class GUI extends JFrame {
         scrollPane.setPreferredSize(new Dimension(400, 150));
 
         // Create a label and a button
-        JLabel label = new JLabel("Create a new library");
-        label.setFont(new Font("Arial", Font.BOLD, 16));
+        JLabel label = new JLabel("Create a new library:");
         JButton button = new JButton("Create");
         button.setPreferredSize(new Dimension(120, 30));
 
