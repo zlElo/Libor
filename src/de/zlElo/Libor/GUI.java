@@ -1,9 +1,13 @@
 package de.zlElo.Libor;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Objects;
+import de.zlElo.Libor.worker.dbWriter;
+import de.zlElo.Libor.LibaryView;
 
 public class GUI extends JFrame {
     public GUI() {
@@ -30,6 +34,21 @@ public class GUI extends JFrame {
         listDb.setVisibleRowCount(6);
         JScrollPane scrollPane = new JScrollPane(listDb);
         scrollPane.setPreferredSize(new Dimension(400, 150));
+
+        // event for double-click on item in list
+        listDb.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedIndex = listDb.getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        String selectedItem = dbs.getElementAt(selectedIndex);
+                        // debug: System.out.println("Selected item: " + selectedItem);
+                        new LibaryView(selectedItem);
+                    }
+                }
+            }
+        });
 
         // Create a label and a button
         JLabel label = new JLabel("Create a new library:");
