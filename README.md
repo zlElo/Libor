@@ -1,2 +1,2 @@
 # Libor
-Libor is a intuitive and fast libary manager, written in Java
+Libor is an intuitive and fast libary manager, written in Java
