@@ -44,7 +44,10 @@ public class GUI extends JFrame {
                     if (selectedIndex != -1) {
                         String selectedItem = dbs.getElementAt(selectedIndex);
                         // debug: System.out.println("Selected item: " + selectedItem);
-                        new LibaryView(selectedItem);
+                        new LibaryView(selectedItem).setVisible(true);
+
+                        // close JFrame window
+                        dispose();
                     }
                 }
             }
